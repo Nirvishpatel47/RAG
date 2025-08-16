@@ -33,10 +33,10 @@ def sanitize_and_validate_input(text: str) -> Tuple[bool, str]:
 
     for pattern in BAD_PATTERNS:
         if re.search(pattern, clean_text, re.IGNORECASE):
-            return False, "❌ This question is not allowed due to security or policy reasons."
+            return False, "This question is not allowed due to security or policy reasons."
 
     if len(clean_text) < 3:
-        return False, "❌ Please enter a more meaningful question."
+        return False, "Please enter a more meaningful question."
 
     return True, clean_text
 
@@ -143,10 +143,10 @@ Answer:"""
 # Streamlit UI
 # ----------------------------
 rag_chain, memory, llm = load_all()
-st.title("📜 Google Privacy Policy Q&A")
+st.title(" Google Privacy Policy Q&A")
 st.write("Ask me anything about the Google Privacy Policy. I will only answer from the document.")
 
-user_question = st.text_input("Your Question:")
+user_question = st.text_input("Question:")
 
 if st.button("Ask"):
     is_valid, result = sanitize_and_validate_input(user_question)
@@ -163,3 +163,4 @@ if st.button("Ask"):
             st.write(response)
 
             memory.save_context({"question": result}, {"answer": response})
+
